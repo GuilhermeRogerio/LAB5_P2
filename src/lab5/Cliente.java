@@ -1,12 +1,35 @@
 package lab5;
-
+/**
+ * Representação de um cliente
+ * 
+ * @author Guilherme Rogerio
+ *
+ */
 public class Cliente {
-	
+	/**
+	 * Cpf do cliente.
+	 */
 	private String cpf;
+	/**
+	 * Nome do cliente.
+	 */
 	private String nome;
+	/**
+	 * Email do cliente.
+	 */
 	private String email;
+	/**
+	 * Local de trabalho do cliente.
+	 */
 	private String localizacao;
-	
+	/**
+	 * Controi um cliente tendo como parametros cpf,nome,email,localizacao.
+	 * 
+	 * @param cpf Cpf do cliente
+	 * @param nome Nome do cliente
+	 * @param email Email do cliente
+	 * @param localizacao Local de trabalho do cliente
+	 */
 	public Cliente(String cpf,String nome,String email,String localizacao) {
 		validaEntradas(cpf, nome, email, localizacao);
 		this.cpf = cpf;
@@ -15,10 +38,6 @@ public class Cliente {
 		this.localizacao = localizacao;
 	}
 	
-	public String toString() {
-		return this.nome + " - " + this.localizacao + " - " + this.email;
-	}
-
 	public String getCpf() {
 		return cpf;
 	}
@@ -45,6 +64,13 @@ public class Cliente {
 
 	public void setLocalizacao(String localizacao) {
 		this.localizacao = localizacao;
+	}
+	
+	/**
+	 * Retorna uma string com a representação textual do cliente.
+	 */
+	public String toString() {
+		return this.nome + " - " + this.localizacao + " - " + this.email;
 	}
 
 	@Override

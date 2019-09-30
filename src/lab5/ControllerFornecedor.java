@@ -2,16 +2,33 @@ package lab5;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * Classe que gerencia os fornecedores
+ * 
+ * @author Guilherme Rogerio
+ *
+ */
 public class ControllerFornecedor {
+	/**
+	 * Mapa de fornecedores
+	 */
 	private Map<String,Fornecedor> fornecedores;
 	private Map<ProdutoKey,Produto> produtos;
-	
+	/**
+	 * Constroi o controller e inicia o mapa de fornecedores.
+	 */
 	public ControllerFornecedor() {
 		this.fornecedores = new HashMap<>();
 		this.produtos = new HashMap<>();
 	}
-	
+	/**
+	 * Cadastra um fornecedor no sistema.
+	 * 
+	 * @param nome Nome do fornecedor
+	 * @param email Email do fornecedor
+	 * @param telefone Telefone do fornecedor
+	 * @return O nome do fornecedor
+	 */
 	public String cadastraFornecedor(String nome,String email,String telefone) {
 		if(!this.fornecedores.containsKey(nome)) {
 			this.fornecedores.put(nome, new Fornecedor(nome,email,telefone));
@@ -31,7 +48,12 @@ public class ControllerFornecedor {
 		}
 		
 	}
-	
+	/**
+	 * Retorna a representação tetual de um fornecedor já cadastrado no sistema.
+	 * 
+	 * @param nome Nome do fornecedor
+	 * @return A representação tetual de um fornecedor e retorna "Fornecedor nao existente" se o fornecedor não existir
+	 */
 	public String exibeFornecedor(String nome) {
 		if(this.fornecedores.containsKey(nome)) {
 			return this.fornecedores.get(nome).toString();
@@ -47,7 +69,10 @@ public class ControllerFornecedor {
 		}
 		return "";
 	}
-	
+	/**
+	 * Lista todos os fornecedores já cadastrados no sistema.
+	 * @return Uma string com todos os fornecedores já cadastrados no sistema
+	 */
 	public String listaFornecedor() {
 		String retorno = "";
 		for(String nome : this.fornecedores.keySet()) {
@@ -65,7 +90,11 @@ public class ControllerFornecedor {
 		return false;
 		
 	}
-	
+	/**
+	 * Remove um fornecedor cadastrado no sistema.
+	 * @param nome Nome do fornecedor
+	 * @return "true" se a remoção for bem sucedida e "false" se o fornecedor não existir
+	 */
 	public boolean removeFornecedor(String nome) {
 		if(this.fornecedores.containsKey(nome)) {
 			this.fornecedores.remove(nome);
