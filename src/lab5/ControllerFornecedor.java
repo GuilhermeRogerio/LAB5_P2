@@ -25,9 +25,11 @@ public class ControllerFornecedor {
 			if(!this.produtos.containsKey(new ProdutoKey(nomeProduto,descricao))) {
 				this.fornecedores.get(nomeFornecedor).addProduto(nomeProduto, descricao, preco);
 			}
-			throw new IllegalArgumentException("Produto já existente");
+			
+		}else {
+			throw new IllegalArgumentException("Fornecedor não existente");
 		}
-		throw new IllegalArgumentException("Fornecedor não existente");
+		
 	}
 	
 	public String exibeFornecedor(String nome) {
@@ -40,7 +42,7 @@ public class ControllerFornecedor {
 	public String exibeProduto(String nomeFornecedor,String nomeProduto,String descricao) {
 		if(this.fornecedores.containsKey(nomeFornecedor)) {
 			if(this.produtos.containsKey(new ProdutoKey(nomeProduto,descricao))) {
-				return this.fornecedores.get(nomeFornecedor).toString();
+				return this.produtos.get(new ProdutoKey(nomeProduto,descricao)).toString();
 			}
 		}
 		return "";

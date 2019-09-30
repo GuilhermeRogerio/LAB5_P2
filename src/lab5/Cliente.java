@@ -8,6 +8,7 @@ public class Cliente {
 	private String localizacao;
 	
 	public Cliente(String cpf,String nome,String email,String localizacao) {
+		validaEntradas(cpf, nome, email, localizacao);
 		this.cpf = cpf;
 		this.nome = nome;
 		this.email = email;
@@ -21,8 +22,18 @@ public class Cliente {
 	public String getCpf() {
 		return cpf;
 	}
-	
-	
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getLocalizacao() {
+		return localizacao;
+	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
@@ -61,6 +72,24 @@ public class Cliente {
 		return true;
 	}
 	
+	private void validaEntradas(String cpf,String nome,String email,String localizacao) {
+		if(cpf == null) 
+			throw new NullPointerException("Cpf nulo!");
+		if(nome == null) 
+			throw new NullPointerException("Nome nulo!");
+		if(email == null)
+			throw new NullPointerException("Email nulo!");
+		if(localizacao == null)
+			throw new NullPointerException("Localizacao nula!");
+		if(cpf.trim().equals(""))
+			throw new IllegalArgumentException("Cpf vazio!");
+		if(nome.trim().equals(""))
+			throw new IllegalArgumentException("Nome vazio!");
+		if(email.trim().equals(""))
+			throw new IllegalArgumentException("Email vazio!");
+		if(localizacao.trim().equals(""))
+			throw new IllegalArgumentException("Localizacao vazia!");
+	}
 	
 
 }
