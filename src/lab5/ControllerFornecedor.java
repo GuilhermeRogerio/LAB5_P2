@@ -5,9 +5,11 @@ import java.util.Map;
 
 public class ControllerFornecedor {
 	private Map<String,Fornecedor> fornecedores;
+	private Map<ProdutoKey,Produto> produtos;
 	
 	public ControllerFornecedor() {
 		this.fornecedores = new HashMap<>();
+		this.produtos = new HashMap<>();
 	}
 	
 	public String cadastraFornecedor(String nome,String email,String telefone) {
@@ -18,11 +20,30 @@ public class ControllerFornecedor {
 		throw new IllegalArgumentException("Fornecedor já existente");
 	}
 	
+	public void cadastraProduto(String nomeFornecedor,String nomeProduto,String descricao,String preco) {
+		if(this.fornecedores.containsKey(nomeFornecedor)) {
+			if(!this.produtos.containsKey(new ProdutoKey(nomeProduto,descricao))) {
+				this.fornecedores.get(nomeFornecedor).addProduto(nomeProduto, descricao, preco);
+			}
+			throw new IllegalArgumentException("Produto já existente");
+		}
+		throw new IllegalArgumentException("Fornecedor não existente");
+	}
+	
 	public String exibeFornecedor(String nome) {
 		if(this.fornecedores.containsKey(nome)) {
 			return this.fornecedores.get(nome).toString();
 		} 
 		return "Erro na exibicao do fornecedor nao existe";
+	}
+	
+	public String exibeProduto(String nomeFornecedor,String nomeProduto,String descricao) {
+		if(this.fornecedores.containsKey(nomeFornecedor)) {
+			if(this.produtos.containsKey(new ProdutoKey(nomeProduto,descricao))) {
+				return this.fornecedores.get(nomeFornecedor).toString();
+			}
+		}
+		return "";
 	}
 	
 	public String listaFornecedor() {

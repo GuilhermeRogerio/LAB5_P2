@@ -17,8 +17,8 @@ public class Fornecedor {
 		this.produtos = new HashMap<>();
 	}
 	
-	public void addProduto(String nome,String descricao) {
-		
+	public void addProduto(String nome,String descricao,String preco) {
+		produtos.put(new ProdutoKey(nome,descricao), new Produto(nome,descricao,preco));
 	}
 	
 	
