@@ -28,12 +28,12 @@ public class ControllerCliente {
 	 * @param localizacao Local de trabalho do cliente
 	 * @return O cpf do cliente
 	 */
-	public String cadastraCliente(String cpf,String nome,String email,String localizacao) {
+	public String adicionaCliente(String cpf,String nome,String email,String localizacao) {
 		if(!clientes.containsKey(cpf)) {
 			clientes.put(cpf, new Cliente(cpf,nome,email,localizacao));
 			return clientes.get(cpf).getCpf();
 		}
-		throw new IllegalArgumentException("Cliente já existente");
+		throw new IllegalArgumentException("Erro no cadastro do cliente: cliente ja existe.");
 	}
 	/**
 	 * Retorna a representação textual de um cliente cadastrado no sistema.
@@ -44,7 +44,7 @@ public class ControllerCliente {
 		if(clientes.containsKey(cpf)) {
 			return clientes.get(cpf).toString();
 		} 
-		return "Cliente nao existente";
+		return "Erro na exibicao do cliente: cliente nao existe.";
 	}
 	/**
 	 * Lista todos os clientes cadastrados no sistema.
@@ -59,15 +59,16 @@ public class ControllerCliente {
 		return retorno;
 	}
 	
-	public boolean editaCliente(String cpf,String nome,String email,String localizacao) {
+	public void editaCliente(String cpf,String atributo,String novoValor) {
 		if(clientes.containsKey(cpf)) {
-			this.clientes.get(cpf).setNome(nome);
-			this.clientes.get(cpf).setEmail(email);
-			this.clientes.get(cpf).setLocalizacao(localizacao);
-			return true;
+			if(atributo.equals("nome"))
+				this.clientes.get(cpf).setNome(novoValor);
+			if(atributo.equals("email"))
+				this.clientes.get(cpf).setEmail(novoValor);
+			if(atributo.equals("localizacao"))
+				this.clientes.get(cpf).setLocalizacao(novoValor);
+			
 		}
-		return false;
-		
 	}
 	/**
 	 * Remove um cliente já cadastrado no sistema.
@@ -75,12 +76,10 @@ public class ControllerCliente {
 	 * @param cpf Cpf do cliente
 	 * @return "true" se a remoção for bem sucedida e "false" se o cliente não existir
 	 */
-	public boolean removeCliente(String cpf) {
+	public void removeCliente(String cpf) {
 		if(clientes.containsKey(cpf)) {
 			clientes.remove(cpf);
-			return true;
 		}
-		return false;
 	}
 
 }
